@@ -24,9 +24,8 @@ public class Post extends Timestamped {
 
     private String userEmail;
 
-//    private String title;
-
     private String content;
+    
     private String imageUrl;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
@@ -51,7 +50,6 @@ public class Post extends Timestamped {
 
     public Post (PostResponseDto responseDto) {
         this.userEmail = responseDto.getUserEmail();
-//        this.title = responseDto.getTitle();
         this.content = responseDto.getContent();
         this.imageUrl = responseDto.getImageUrl();
     }
@@ -59,14 +57,12 @@ public class Post extends Timestamped {
 //    post 사진있을 때
     public Post (String content, Account account, String image) {
         this.userEmail = account.getEmail();
-//        this.title = requestDto.getTitle();
         this.content = content;
         this.imageUrl = image;
     }
 //    post 사진없이 만들때
     public Post (String content, Account account) {
         this.userEmail = account.getEmail();
-//        this.title = requestDto.getTitle();
         this.content = content;
         this.imageUrl = "";
     }
