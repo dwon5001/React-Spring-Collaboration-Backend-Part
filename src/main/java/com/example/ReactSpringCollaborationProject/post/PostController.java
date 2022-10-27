@@ -17,7 +17,7 @@ import java.io.IOException;
 public class PostController {
     private final PostService postService;
 
-//    프론트에서 요청 받는 형식
+//    프론트에서 요청 받는 방법
 //    @PostMapping
 //    public ResponseEntity<?> createPost(@ModelAttribute PostRequestDto requestDto,
 //                                        @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
