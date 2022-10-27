@@ -50,12 +50,6 @@ public class PostService {
         }
         return responseDtos;
 
-//        List<PostResponseDto> responseDtos = postRepository.findAll()
-//                .stream().map(post -> post.all()).collect(Collectors.toList());
-//
-//           return responseDtos;
-    }
-
     @Transactional
     public ResponseEntity<?> getPost(Long id, UserDetailsImpl userDetails) {
         Account account = userDetails.getAccount();
@@ -74,35 +68,7 @@ public class PostService {
         }
         return ResponseEntity.ok(post);
     }
-//        Account account = userDetails.getAccount();
-//
-//        Post post = postRepository.findById(id).orElseThrow(
-//                () -> new RuntimeException("게시글 없음"));
-//
-//        List<PostLike> likes = post.getLikes();
-//        post.updateLikeCount(likes.size());
-//
-//        if (postLikeRepository.existsByPostAndAccount(post, account)) {
-//            post.updateLikeState(true);
-//        }
-//
-//        return new PostResponseDto(post);
 
-    //    @Transactional
-//    public ResponseEntity<?> createPost(PostRequestDto requestDto,
-//                                        UserDetailsImpl userDetails) throws IOException {
-//
-//        Account account = userDetails.getAccount();
-//
-//        String imgPath = s3Uploader.uploadFiles(requestDto.getImage(), "static");
-//
-//        Post post = new Post(requestDto, account, imgPath);
-//
-//        postRepository.save(post);
-//
-//        return ResponseEntity.ok(post);
-//
-//    }
     @Transactional
     public ResponseEntity<?> createPost(MultipartFile image, String content,
                                         UserDetailsImpl userDetails) throws IOException {
@@ -120,9 +86,6 @@ public class PostService {
             return ResponseEntity.ok(post);
         }
 
-        //       String imgPath = s3Uploader.uploadFiles(image, "static");
-
-
     }
 
     @Transactional
@@ -136,12 +99,10 @@ public class PostService {
             throw new RuntimeException("작성자 아님");
         }
         post.updatePost(requestDto.getContent());
-//        postRepository.save(post);
 
         return post;
 
     }
-    //유도원 바보
 
     @Transactional
     public ResponseEntity<String> deletePost(Long id, UserDetailsImpl userDetails) {
