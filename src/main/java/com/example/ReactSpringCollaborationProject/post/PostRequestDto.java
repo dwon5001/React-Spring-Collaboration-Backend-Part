@@ -8,10 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class PostRequestDto {
 
-//    private String title;
-
     private String content;
 
-//    private MultipartFile image;
+//    private MultipartFile image;   // @modelattribute 사용시 활용
 
 }
