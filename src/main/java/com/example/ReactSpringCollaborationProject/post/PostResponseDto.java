@@ -11,7 +11,6 @@ import java.util.List;
 public class PostResponseDto {
     private Long id;
     private String userEmail;
-//    private String title;
     private String content;
     private String imageUrl;
     private int likeCount;
@@ -21,7 +20,6 @@ public class PostResponseDto {
     public PostResponseDto (Post post){
         this.id = post.getId();
         this.userEmail = post.getUserEmail();
-//        this.title = post.getTitle();
         this.content = post.getContent();
         this.imageUrl = post.getImageUrl();
         this.likeCount = post.getLikeCount();
