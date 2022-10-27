@@ -44,7 +44,6 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-       // http.cors().configurationSource(configurationSource());
         http.cors().configurationSource(configurationSource());
         http.csrf().disable();
 
@@ -54,12 +53,11 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
-//                .authorizeRequests()
-//                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll(); // 57줄 58줄 접속 중요한 부분
+
 
         return http.build();
     }
-    //이거 설정하면
+    
     @Bean
     public CorsConfigurationSource configurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
@@ -73,9 +71,7 @@ public class WebSecurityConfig {
         configuration.addExposedHeader("Access_Token");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-//        .and()
-//                .authorizeRequests()
-//                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
+
 
         return source;
     }
