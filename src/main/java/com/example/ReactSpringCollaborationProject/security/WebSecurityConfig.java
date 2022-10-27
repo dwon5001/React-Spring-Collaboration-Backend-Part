@@ -54,6 +54,8 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
+//                .authorizeRequests()
+//                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll(); // 57줄 58줄 접속 중요한 부분
 
         return http.build();
     }

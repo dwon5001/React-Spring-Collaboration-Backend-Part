@@ -28,7 +28,7 @@ public class PostService {
     private final S3Uploader s3Uploader;
 
     @Transactional
-    public List<PostResponseDto> getAllPosts(UserDetailsImpl userDetails){
+    public List<PostResponseDto> getAllPosts(UserDetailsImpl userDetails) {
         Account account = userDetails.getAccount();
 
         List<Post> posts = postRepository.findAll();
@@ -47,13 +47,15 @@ public class PostService {
             post.updateLikeCount(likes.size());
 
             responseDtos.add(new PostResponseDto(post));
-        }   return responseDtos;
+        }
+        return responseDtos;
 
 //        List<PostResponseDto> responseDtos = postRepository.findAll()
 //                .stream().map(post -> post.all()).collect(Collectors.toList());
 //
 //           return responseDtos;
     }
+
     @Transactional
     public ResponseEntity<?> getPost(Long id, UserDetailsImpl userDetails) {
         Account account = userDetails.getAccount();
@@ -69,7 +71,8 @@ public class PostService {
 
         if (postLikeRepository.existsByPostAndAccount(post, account)) {
             post.updateLikeState(true);
-        }   return ResponseEntity.ok(post);
+        }
+        return ResponseEntity.ok(post);
     }
 //        Account account = userDetails.getAccount();
 //
@@ -85,7 +88,7 @@ public class PostService {
 //
 //        return new PostResponseDto(post);
 
-//    @Transactional
+    //    @Transactional
 //    public ResponseEntity<?> createPost(PostRequestDto requestDto,
 //                                        UserDetailsImpl userDetails) throws IOException {
 //
@@ -106,18 +109,18 @@ public class PostService {
 
         Account account = userDetails.getAccount();
 
-        if (!(image == null)){
+        if (!(image == null)) {
             String imgPath = s3Uploader.uploadFiles(image, "static");
             Post post = new Post(content, account, imgPath);
             postRepository.save(post);
             return ResponseEntity.ok(post);
-        }else {
+        } else {
             Post post = new Post(content, account);
             postRepository.save(post);
             return ResponseEntity.ok(post);
         }
 
- //       String imgPath = s3Uploader.uploadFiles(image, "static");
+        //       String imgPath = s3Uploader.uploadFiles(image, "static");
 
 
     }
@@ -127,7 +130,7 @@ public class PostService {
         Account account = userDetails.getAccount();
 
         Post post = postRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("글 없음"));
+                .orElseThrow(() -> new RuntimeException("글 없음"));
 
         if (!account.getEmail().equals(post.getUserEmail())) {
             throw new RuntimeException("작성자 아님");
@@ -145,9 +148,9 @@ public class PostService {
         Account account = userDetails.getAccount();
 
         Post post = postRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("글 없음"));
+                .orElseThrow(() -> new RuntimeException("글 없음"));
 
-        if(!account.getEmail().equals(post.getUserEmail())) {
+        if (!account.getEmail().equals(post.getUserEmail())) {
             throw new RuntimeException("작성자 아님");
         }
 
